@@ -35,14 +35,12 @@ function App() {
   const [hand, setHand] = useState([]); //set state of hand to empty array
   const ftr_button = ["Flop","Turn","River"];
   const [count, setCount] = useState(0);
-  const [isOpen, setOpen] = React.useState(false);
+  const [isOpen, setOpen] = useState(false);
   
   
   const handleClick = () => {
+    if(count + 1 >= ftr_button.length) return;
     setCount(count+1);
-    if(count > 1){
-      setCount(count)
-    }
   }
 
   return (
@@ -92,9 +90,3 @@ function App() {
 }
 
 export default App
-
-
-
-
-
-
