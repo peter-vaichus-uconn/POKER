@@ -1,15 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import {cards, faces} from './cards'
 import './App.css'
 
 function gen_hand(cards, setHand){
   let cards_copy = cards.slice();
   const card1 = cards_copy[Math.floor(Math.random()* cards_copy.length)];
-  let index = cards_copy.indexOf(card1);
-  cards_copy.splice(index,1)
+  let index1 = cards_copy.indexOf(card1);
+  cards_copy.splice(index1,1)
   const card2 = cards_copy[Math.floor(Math.random()* cards_copy.length)];
+  let index2 = cards_copy.indexOf(card1);
+  cards_copy.splice(index2,1)
+  const card3 = cards_copy[Math.floor(Math.random()* cards_copy.length)];
+  let index3 = cards_copy.indexOf(card1);
+  cards_copy.splice(index3,1)
+  const card4 = cards_copy[Math.floor(Math.random()* cards_copy.length)];
+  let index4 = cards_copy.indexOf(card1);
+  cards_copy.splice(index4,1)
+  const card5 = cards_copy[Math.floor(Math.random()* cards_copy.length)];
 
   if (faces[card1[0]]){
     card1[0] = faces[card1[0]]
@@ -18,26 +25,68 @@ function gen_hand(cards, setHand){
     card2[0] = faces[card2[0]]
   }
 
-  setHand([card1, card2]);
+
+
+  setHand([card1, card2, card3, card4, card5]);
 
 }
 
 function App() {
-  const [hand, setHand] = useState([]);
+  const [hand, setHand] = useState([]); //set state of hand to empty array
+  const ftr_button = ["Flop","Turn","River"];
+  const [count, setCount] = useState(0);
+  const [isOpen, setOpen] = React.useState(false);
+  
+  
+  const handleClick = () => {
+    setCount(count+1);
+    if(count > 1){
+      setCount(count)
+    }
+  }
+
   return (
     <>
       <h1>POKER</h1>
-      <div className="card">
-        <button type="button" onClick={() => {gen_hand(cards, setHand)}}>
+      <div>
+        <button type="button" onClick={() => {gen_hand(cards, setHand)}}> 
           generate hand
         </button>
-        <p>
-          {hand[0]} {hand[1]}
-        </p>
+      </div> <br />
+      <div style={{ display: "flex", justifyContent: 'center', flexWrap: "wrap" }}>
+        <div className="card">
+          <h1>
+            {hand[0]}
+          </h1>
+        </div>
+        <div className="card">
+          <h1>
+            {hand[1]}
+          </h1>
+        </div>
+      </div><br />
+      <div>
+        <button type="button" onClick={handleClick} > 
+          {ftr_button[count]}
+        </button>
+      </div> <br />
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div className="card">
+          <h1>
+            {hand[2]}
+          </h1>
+        </div>
+        <div className="card">
+          <h1>
+            {hand[3]}
+          </h1>
+        </div>
+        <div className="card">
+          <h1>
+            {hand[4]}
+          </h1>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }

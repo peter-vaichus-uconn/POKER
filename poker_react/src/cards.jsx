@@ -18,3 +18,27 @@ export const faces = {
     12:"Q",
     11:"J"
 };
+
+function gen_hand(cards, setHand){
+    let cards_copy = cards.slice();
+    const card1 = cards_copy[Math.floor(Math.random()* cards_copy.length)];
+    let index = cards_copy.indexOf(card1);
+    cards_copy.splice(index,1);
+    const card2 = cards_copy[Math.floor(Math.random()* cards_copy.length)];
+  
+    let index2 = cards_copy.indexOf(card2);
+    cards_copy.splice(index2,1)
+    const flop = cards_copy[Math.floor(Math.random()* cards_copy.length)];
+  
+    if (faces[card1[0]]){
+      card1[0] = faces[card1[0]]
+    }
+    if (faces[card2[0]]){
+      card2[0] = faces[card2[0]]
+    }
+  
+    setHand([card1, card2]);
+  
+  }
+
+export default gen_hand;
